@@ -19,7 +19,7 @@ const onRequestError = (error: AxiosError): Promise<AxiosError> => {
 };
 
 const onResponse = (response: AxiosResponse): AxiosResponse => {
-  return response;
+  return response.data;
 };
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
