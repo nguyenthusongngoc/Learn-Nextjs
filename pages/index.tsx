@@ -2,10 +2,17 @@ import type { NextPage } from "next";
 // import Head from "next/head";
 // import Image from "next/image";
 // import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useAppSelector, useAppDispatch } from "../src/store";
-import { decrement, increment, incrementAsync, incrementByAmount, incrementIfOdd, selectCount } from "../src/store/counter";
-import { $http } from "../src/utils/http";
+import { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../src/utils/hooks/global";
+import {
+  decrement,
+  increment,
+  incrementAsync,
+  incrementByAmount,
+  incrementIfOdd,
+  selectCount,
+} from "../src/store/counter";
+import useFetch from "../src/utils/hooks/fetch";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -13,19 +20,9 @@ const Home: NextPage = () => {
   const dispatch = useAppDispatch();
   const [incrementAmount, setIncrementAmount] = useState("2");
   const incrementValue = Number(incrementAmount) || 0;
-  console.log(process.env.URL);
 
-  useEffect(()=>{
-    async function fetchApi() {
-      try {
-        const res = await $http.get('/posts')
-        console.log(res);
-      } catch (error) {
-        console.log('Fail ', error);
-      }
-    }
-    fetchApi();
-  } ,[])
+  const { isLoading, serverError, apiData } = useFetch("GET", "postss/1", null);
+  console.log("🚀 ~ file: index.tsx ~ line 18 ~ apiData", apiData);
   return (
     <div className={styles.container}>
       <button
