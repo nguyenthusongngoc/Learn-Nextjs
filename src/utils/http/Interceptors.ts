@@ -7,10 +7,10 @@ import {
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   config.baseURL = process.env.URL
-  if (!config?.headers) {
-    throw new Error(`Expected 'config' and 'config.headers' not to be undefined`);
-  }
-  config.headers.Authorization= `Bearer ${localStorage.getItem('token')}`;
+  // if (!config?.headers) {
+  //   throw new Error(`Expected 'config' and 'config.headers' not to be undefined`);
+  // }
+  // config.headers.Authorization= `Bearer ${localStorage.getItem('token')}`;
   return config;
 };
 
