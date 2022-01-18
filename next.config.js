@@ -7,5 +7,15 @@ module.exports = {
   },
   env: {
     URL: process.env.URL,
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: false,
+      }
+    ]
   }
 }
+
