@@ -13,7 +13,7 @@ import {
   selectCount,
 } from "../src/store/counter";
 import styles from "../styles/Home.module.css";
-import useFetch from "../src/utils/hooks/fetch";
+import useFetch from "../src/utils/hooks/useFetch";
 import Link from "next/link";
 
 const Home: NextPage = () => {
@@ -25,6 +25,8 @@ const Home: NextPage = () => {
   const { isLoading, serverError, apiData } = useFetch("GET", "posts/1", null);
   return (
     <>
+      {/* Pre-fetch -> when page rendered, child page in <Link/> href attribute will pre-fetch */}
+      {/* More detail: Network inspect, you can see post.json and chunks/post */}
       <Link href={"/post"}>
         <a>To Post Page</a>
       </Link>

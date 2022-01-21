@@ -12,10 +12,9 @@ module.exports = {
     return [
       {
         source: '/',
-        destination: '/home',
+        destination: '/post',
         permanent: false,
       }
     ]
   }
 }
-

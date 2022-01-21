@@ -9,10 +9,10 @@ const Post = (props: IPostProps) => {
   const router = useRouter();
   return (
     <div>
-      {posts?.map((x: any, i) => {
+      {posts?.map((post: any, index) => {
         return (
-          <p key={i} onClick={() => router.push(`/post/${x.id}`)}>
-            {x.title}
+          <p key={index} onClick={() => router.push(`/post/${post.id}`)}>
+            {post.title}
           </p>
         );
       })}
@@ -21,8 +21,7 @@ const Post = (props: IPostProps) => {
 };
 export default Post;
 // Get API in server side and convert to static data -> convert to html
-Post.getInitialProps = async () => {
-  const res = await $http("/posts?_limit=5");
-  const result = await res.data;
-  return { posts: result };
+export const getStaticProps = async () => {
+  const {data}:any = await $http("posts?_limit=10");
+  return { props: { posts: data } };
 };
