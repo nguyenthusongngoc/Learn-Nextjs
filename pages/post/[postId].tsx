@@ -9,10 +9,11 @@ interface IPostDetailProps {
 }
 
 const PostDetail = ({post}: IPostDetailProps) => {
-  // const router = useRouter()
-  // if (router.isFallback) {  case: fallback: true
-  //   return <p>Loading...</p>;
-  // }
+  const router = useRouter()
+  // case: fallback: true
+  if (router.isFallback) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>

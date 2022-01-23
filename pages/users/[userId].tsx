@@ -6,7 +6,7 @@ interface IUserDetailProps {
 }
 const UserDetail = ({ users }: IUserDetailProps) => {
   return (
-    <div>E
+    <div>
       {users.map((user: any, index) => {
         return <p key={index}>{user.name}</p>;
       })}
