@@ -4,8 +4,7 @@ import { $http } from "../../src/utils/http";
 export interface IPostProps {
   posts: Array<Object>;
 }
-const Post = (props: IPostProps) => {
-  const { posts } = props;
+const Post = ({posts}: IPostProps) => {
   const router = useRouter();
   return (
     <div>
@@ -22,6 +21,9 @@ const Post = (props: IPostProps) => {
 export default Post;
 // Get API in server side and convert to static data -> convert to html
 export const getStaticProps = async () => {
-  const {data}:any = await $http("posts?_limit=10");
-  return { props: { posts: data } };
+  const { data: posts }: any = await $http("posts?_limit=10");
+  return {
+    props: { posts },
+    revalidate: 3, // data just update after 3 second
+  };
 };

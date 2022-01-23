@@ -1,20 +1,29 @@
-import * as React from "react";
 import { $http } from "../../src/utils/http";
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { useRouter } from "next/router";
 interface IPostDetailProps {
   post: {
+    id: Number;
     title: String;
   };
 }
 
-const PostDetail = (props: IPostDetailProps) => {
-  const { post } = props;
-  return <>{post.title}</>;
+const PostDetail = ({post}: IPostDetailProps) => {
+  // const router = useRouter()
+  // if (router.isFallback) {  case: fallback: true
+  //   return <p>Loading...</p>;
+  // }
+
+  return (
+    <>
+      {post.id} {post.title}
+    </>
+  );
 };
 
 export default PostDetail;
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const { data }: any = await $http("posts?_limit=10");
   const posts = data;
 
@@ -22,7 +31,15 @@ export async function getStaticPaths() {
     params: { postId: "" + post.id },
   }));
 
-  return { paths, fallback: false };
+  return {
+    paths,
+    // fallback: true,
+    // -> If when generate data is falsy -> params will undefine and wait server side refetch for update params -> case: Need loading
+    fallback: false
+    // -> Will navigate to 404 if when generate data is falsy
+    // fallback: 'blocking'
+    // -> Wait still data truthy
+  };
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
