@@ -26,6 +26,11 @@ const Navbar = () => {
               <a>Docs</a>
             </Link>
           </li>
+          <li>
+            <Link href="/server-side-auth">
+              <a>Auth</a>
+            </Link>
+          </li>
           {!session ? (
             <li>
               <Link href="/api/auth/signin">
